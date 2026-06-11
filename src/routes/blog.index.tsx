@@ -8,7 +8,7 @@ import { categories } from "@/data/categories";
 import { useI18n } from "@/lib/i18n";
 import type { CategoryId } from "@/data/categories";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   head: () => ({
     meta: [
       { title: "Blog — MongoHacker" },

@@ -11,7 +11,7 @@ const searchSchema = z.object({
   cat: z.enum(["cyber", "ai", "dev", "productivity"]).optional(),
 });
 
-export const Route = createFileRoute("/academia")({
+export const Route = createFileRoute("/academia/")({
   validateSearch: searchSchema,
   head: () => ({
     meta: [

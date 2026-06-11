@@ -13,9 +13,9 @@ import { Route as SobreRouteImport } from './routes/sobre'
 import { Route as RecursosRouteImport } from './routes/recursos'
 import { Route as MongomailRouteImport } from './routes/mongomail'
 import { Route as ComunidadRouteImport } from './routes/comunidad'
-import { Route as BlogRouteImport } from './routes/blog'
-import { Route as AcademiaRouteImport } from './routes/academia'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as AcademiaIndexRouteImport } from './routes/academia.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as AcademiaSlugRouteImport } from './routes/academia.$slug'
 
@@ -39,110 +39,112 @@ const ComunidadRoute = ComunidadRouteImport.update({
   path: '/comunidad',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AcademiaRoute = AcademiaRouteImport.update({
-  id: '/academia',
-  path: '/academia',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AcademiaIndexRoute = AcademiaIndexRouteImport.update({
+  id: '/academia/',
+  path: '/academia/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BlogSlugRoute = BlogSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => BlogRoute,
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const AcademiaSlugRoute = AcademiaSlugRouteImport.update({
-  id: '/$slug',
-  path: '/$slug',
-  getParentRoute: () => AcademiaRoute,
+  id: '/academia/$slug',
+  path: '/academia/$slug',
+  getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/academia': typeof AcademiaRouteWithChildren
-  '/blog': typeof BlogRouteWithChildren
   '/comunidad': typeof ComunidadRoute
   '/mongomail': typeof MongomailRoute
   '/recursos': typeof RecursosRoute
   '/sobre': typeof SobreRoute
   '/academia/$slug': typeof AcademiaSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/academia/': typeof AcademiaIndexRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/academia': typeof AcademiaRouteWithChildren
-  '/blog': typeof BlogRouteWithChildren
   '/comunidad': typeof ComunidadRoute
   '/mongomail': typeof MongomailRoute
   '/recursos': typeof RecursosRoute
   '/sobre': typeof SobreRoute
   '/academia/$slug': typeof AcademiaSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/academia': typeof AcademiaIndexRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/academia': typeof AcademiaRouteWithChildren
-  '/blog': typeof BlogRouteWithChildren
   '/comunidad': typeof ComunidadRoute
   '/mongomail': typeof MongomailRoute
   '/recursos': typeof RecursosRoute
   '/sobre': typeof SobreRoute
   '/academia/$slug': typeof AcademiaSlugRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/academia/': typeof AcademiaIndexRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/academia'
-    | '/blog'
     | '/comunidad'
     | '/mongomail'
     | '/recursos'
     | '/sobre'
     | '/academia/$slug'
     | '/blog/$slug'
+    | '/academia/'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/academia'
-    | '/blog'
     | '/comunidad'
     | '/mongomail'
     | '/recursos'
     | '/sobre'
     | '/academia/$slug'
     | '/blog/$slug'
+    | '/academia'
+    | '/blog'
   id:
     | '__root__'
     | '/'
-    | '/academia'
-    | '/blog'
     | '/comunidad'
     | '/mongomail'
     | '/recursos'
     | '/sobre'
     | '/academia/$slug'
     | '/blog/$slug'
+    | '/academia/'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AcademiaRoute: typeof AcademiaRouteWithChildren
-  BlogRoute: typeof BlogRouteWithChildren
   ComunidadRoute: typeof ComunidadRoute
   MongomailRoute: typeof MongomailRoute
   RecursosRoute: typeof RecursosRoute
   SobreRoute: typeof SobreRoute
+  AcademiaSlugRoute: typeof AcademiaSlugRoute
+  BlogSlugRoute: typeof BlogSlugRoute
+  AcademiaIndexRoute: typeof AcademiaIndexRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -175,20 +177,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComunidadRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/academia': {
-      id: '/academia'
-      path: '/academia'
-      fullPath: '/academia'
-      preLoaderRoute: typeof AcademiaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/': {
       id: '/'
       path: '/'
@@ -196,54 +184,58 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/academia/': {
+      id: '/academia/'
+      path: '/academia'
+      fullPath: '/academia/'
+      preLoaderRoute: typeof AcademiaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog/$slug': {
       id: '/blog/$slug'
-      path: '/$slug'
+      path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
-      parentRoute: typeof BlogRoute
+      parentRoute: typeof rootRouteImport
     }
     '/academia/$slug': {
       id: '/academia/$slug'
-      path: '/$slug'
+      path: '/academia/$slug'
       fullPath: '/academia/$slug'
       preLoaderRoute: typeof AcademiaSlugRouteImport
-      parentRoute: typeof AcademiaRoute
+      parentRoute: typeof rootRouteImport
     }
   }
 }
 
-interface AcademiaRouteChildren {
-  AcademiaSlugRoute: typeof AcademiaSlugRoute
-}
-
-const AcademiaRouteChildren: AcademiaRouteChildren = {
-  AcademiaSlugRoute: AcademiaSlugRoute,
-}
-
-const AcademiaRouteWithChildren = AcademiaRoute._addFileChildren(
-  AcademiaRouteChildren,
-)
-
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AcademiaRoute: AcademiaRouteWithChildren,
-  BlogRoute: BlogRouteWithChildren,
   ComunidadRoute: ComunidadRoute,
   MongomailRoute: MongomailRoute,
   RecursosRoute: RecursosRoute,
   SobreRoute: SobreRoute,
+  AcademiaSlugRoute: AcademiaSlugRoute,
+  BlogSlugRoute: BlogSlugRoute,
+  AcademiaIndexRoute: AcademiaIndexRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
