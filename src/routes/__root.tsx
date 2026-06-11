@@ -87,7 +87,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "author", content: "José Miguel Gómez Fernández" },
       { name: "theme-color", content: "#0a0a0a" },
       { property: "og:site_name", content: "MongoHacker Academy" },
-      { property: "og:title", content: "MongoHacker Academy" },
+      { property: "og:title", content: "MongoHacker Academy — Ciberseguridad, IA y código sin rollos" },
       {
         property: "og:description",
         content: "Ciberseguridad explicada sin rollos. Cursos, blog y comunidad para humanos (y monos).",
@@ -95,6 +95,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:creator", content: "@mongohacker" },
+      { name: "twitter:title", content: "MongoHacker Academy — Ciberseguridad, IA y código sin rollos" },
+      { name: "description", content: "MongoHacker Academy offers accessible cybersecurity, AI, and programming courses for beginners." },
+      { property: "og:description", content: "MongoHacker Academy offers accessible cybersecurity, AI, and programming courses for beginners." },
+      { name: "twitter:description", content: "MongoHacker Academy offers accessible cybersecurity, AI, and programming courses for beginners." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/28c002cf-4a4d-4cad-9125-cdd1c9bca67b/id-preview-daddd690--22f1a2c7-35a3-41c9-a15f-4b0ef52d1f51.lovable.app-1781166556660.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/28c002cf-4a4d-4cad-9125-cdd1c9bca67b/id-preview-daddd690--22f1a2c7-35a3-41c9-a15f-4b0ef52d1f51.lovable.app-1781166556660.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
