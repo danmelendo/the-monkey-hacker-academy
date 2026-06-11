@@ -79,7 +79,7 @@ function CoursePage() {
             <span className="flex items-center gap-2 text-muted-foreground">
               <BookOpen className="h-4 w-4 text-primary" /> {course.lessons} {t("academy.lessons")}
             </span>
-            <span className="text-primary">{t(("common." + course.level) as "common.beginner")}</span>
+            <span className="text-primary">{t(`common.${course.level}` as const)}</span>
           </div>
 
           <button
