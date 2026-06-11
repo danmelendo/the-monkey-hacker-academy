@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { SiteShell } from "../components/SiteShell";
 
 function NotFoundComponent() {
   return (
@@ -77,19 +78,44 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "MongoHacker Academy — Ciberseguridad, IA y código sin rollos" },
+      {
+        name: "description",
+        content:
+          "Aprende ciberseguridad, inteligencia artificial y programación con cursos sencillos, divertidos y visuales. Una academia para humanos (y monos).",
+      },
+      { name: "author", content: "José Miguel Gómez Fernández" },
+      { name: "theme-color", content: "#0a0a0a" },
+      { property: "og:site_name", content: "MongoHacker Academy" },
+      { property: "og:title", content: "MongoHacker Academy" },
+      {
+        property: "og:description",
+        content: "Ciberseguridad explicada sin rollos. Cursos, blog y comunidad para humanos (y monos).",
+      },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:creator", content: "@mongohacker" },
     ],
     links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: appCss,
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap",
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "MongoHacker Academy",
+          description:
+            "Academia online para aprender ciberseguridad, IA y programación de forma sencilla, divertida y visual.",
+          founder: { "@type": "Person", name: "José Miguel Gómez Fernández" },
+        }),
       },
     ],
   }),
@@ -101,7 +127,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="es" className="dark">
       <head>
         <HeadContent />
       </head>
@@ -118,8 +144,9 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <SiteShell>
+        <Outlet />
+      </SiteShell>
     </QueryClientProvider>
   );
 }
