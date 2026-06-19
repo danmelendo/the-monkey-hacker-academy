@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
-import { BookOpen, ListChecks, FileText, Notebook } from "lucide-react";
+import { ShieldCheck, Server, Terminal } from "lucide-react";
 
-export type ResourceType = "ebook" | "checklist" | "template" | "guide";
+export type ResourceType = "guía" | "manual";
 
 export interface Resource {
   slug: string;
@@ -9,74 +9,45 @@ export interface Resource {
   description: { es: string; en: string };
   type: ResourceType;
   icon: LucideIcon;
-  pages: number;
+  // Ruta al PDF dentro de /public. Descarga directa, sin backend.
+  file: string;
 }
 
 export const resources: Resource[] = [
   {
-    slug: "ebook-ciberseguridad-familiar",
-    title: { es: "Ebook: Ciberseguridad familiar", en: "Ebook: Family cybersecurity" },
+    slug: "asegurar-tu-vps-2026",
+    title: { es: "Cómo asegurar tu VPS en 2026", en: "How to secure your VPS in 2026" },
     description: {
-      es: "Guía completa para proteger a tu familia online: niños, mayores y todo lo que hay en medio.",
-      en: "Full guide to protect your family online: kids, elders and everyone in between.",
+      es: "Guía práctica para blindar un servidor VPS desde cero: firewall, SSH, fail2ban y buenas prácticas de hardening.",
+      en: "Practical guide to harden a VPS from scratch: firewall, SSH, fail2ban and hardening best practices.",
     },
-    type: "ebook",
-    icon: BookOpen,
-    pages: 48,
+    type: "guía",
+    icon: ShieldCheck,
+    file: "/recursos/asegurar-tu-vps-2026.pdf",
   },
   {
-    slug: "checklist-cuenta-segura",
-    title: { es: "Checklist: cuenta 100% segura", en: "Checklist: 100% secure account" },
+    slug: "instalar-trilium-notes-vps",
+    title: { es: "Instalar Trilium Notes en tu VPS", en: "Install Trilium Notes on your VPS" },
     description: {
-      es: "30 puntos para blindar cualquier cuenta importante (banco, email, redes).",
-      en: "30 points to harden any important account (bank, email, socials).",
+      es: "Paso a paso para montar tu propio gestor de notas autoalojado Trilium en un VPS.",
+      en: "Step-by-step setup to self-host your own Trilium notes manager on a VPS.",
     },
-    type: "checklist",
-    icon: ListChecks,
-    pages: 4,
+    type: "guía",
+    icon: Server,
+    file: "/recursos/instalar-trilium-notes-vps.pdf",
   },
   {
-    slug: "plantilla-prompts-trabajo",
-    title: { es: "Plantilla: prompts para el trabajo", en: "Template: prompts for work" },
-    description: {
-      es: "20 plantillas de prompts probados para emails, reuniones, reportes y más.",
-      en: "20 tested prompt templates for emails, meetings, reports and more.",
+    slug: "wsl-ubuntu-stable-diffusion",
+    title: {
+      es: "WSL + Ubuntu + Stable Diffusion WebUI en Windows",
+      en: "WSL + Ubuntu + Stable Diffusion WebUI on Windows",
     },
-    type: "template",
-    icon: FileText,
-    pages: 12,
-  },
-  {
-    slug: "guia-pdf-monta-tu-lab",
-    title: { es: "Guía PDF: monta tu laboratorio hacker", en: "PDF guide: build your hacker lab" },
     description: {
-      es: "Setup paso a paso para practicar pentesting en tu propio ordenador sin riesgo.",
-      en: "Step-by-step setup to practice pentesting on your own machine risk-free.",
+      es: "Manual completo para instalar Ubuntu sobre WSL y poner en marcha Stable Diffusion WebUI en Windows.",
+      en: "Complete manual to install Ubuntu on WSL and get Stable Diffusion WebUI running on Windows.",
     },
-    type: "guide",
-    icon: Notebook,
-    pages: 26,
-  },
-  {
-    slug: "ebook-ia-para-estudiar",
-    title: { es: "Ebook: IA para estudiar mejor", en: "Ebook: AI to study better" },
-    description: {
-      es: "Cómo usar IA sin hacer trampas y aprender más rápido. Para estudiantes y curiosos.",
-      en: "How to use AI without cheating and learn faster. For students and curious minds.",
-    },
-    type: "ebook",
-    icon: BookOpen,
-    pages: 32,
-  },
-  {
-    slug: "checklist-productividad",
-    title: { es: "Checklist: semana productiva", en: "Checklist: productive week" },
-    description: {
-      es: "El ritual de domingo y viernes que cambia tu semana entera.",
-      en: "The Sunday and Friday ritual that changes your whole week.",
-    },
-    type: "checklist",
-    icon: ListChecks,
-    pages: 3,
+    type: "manual",
+    icon: Terminal,
+    file: "/recursos/wsl-ubuntu-stable-diffusion-webui-windows.pdf",
   },
 ];

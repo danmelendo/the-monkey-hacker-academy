@@ -1,7 +1,9 @@
 import { Link } from "@tanstack/react-router";
-import { Github, Youtube, Twitter } from "lucide-react";
+import { Youtube, Instagram } from "lucide-react";
 import { Logo } from "./Logo";
+import { TikTokIcon } from "./SocialIcons";
 import { useI18n } from "@/lib/i18n";
+import { SOCIAL } from "@/lib/site";
 
 export function Footer() {
   const { t } = useI18n();
@@ -47,14 +49,32 @@ export function Footer() {
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">{t("footer.tagline")}</p>
             <div className="mt-4 flex gap-3 text-muted-foreground">
-              <a href="#" className="hover:text-primary transition" aria-label="YouTube">
+              <a
+                href={SOCIAL.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition"
+                aria-label="YouTube"
+              >
                 <Youtube className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-primary transition" aria-label="GitHub">
-                <Github className="h-5 w-5" />
+              <a
+                href={SOCIAL.tiktok}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition"
+                aria-label="TikTok"
+              >
+                <TikTokIcon className="h-5 w-5" />
               </a>
-              <a href="#" className="hover:text-primary transition" aria-label="Twitter">
-                <Twitter className="h-5 w-5" />
+              <a
+                href={SOCIAL.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition"
+                aria-label="Instagram"
+              >
+                <Instagram className="h-5 w-5" />
               </a>
             </div>
           </div>

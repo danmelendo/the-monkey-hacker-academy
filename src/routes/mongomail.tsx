@@ -37,12 +37,12 @@ function MongoMailPage() {
             </div>
             <div>
               <p className="text-xs font-mono text-primary uppercase tracking-wider">~/inbox</p>
-              <p className="font-display text-lg font-bold">8.500+ suscriptores</p>
+              <p className="font-display text-lg font-bold">La newsletter de MongoHacker</p>
             </div>
           </div>
           <NewsletterForm />
           <p className="mt-3 text-xs text-muted-foreground font-mono">
-            Cero spam · Cancelas con un clic · Cada lunes a las 8:00
+            Cero spam · Cancelas cuando quieras
           </p>
         </div>
       </section>

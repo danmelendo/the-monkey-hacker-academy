@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { courseBySlug } from "@/data/courses";
 import { categoryById } from "@/data/categories";
 import { useI18n } from "@/lib/i18n";
+import { SUPERPROF_URL, hasSuperprof } from "@/lib/site";
 
 export const Route = createFileRoute("/academia/$slug")({
   loader: ({ params }) => {
@@ -82,12 +83,25 @@ function CoursePage() {
             <span className="text-primary">{t(`common.${course.level}` as const)}</span>
           </div>
 
-          <button
-            onClick={() => toast.success("Pronto disponible — suscríbete a MongoMail para enterarte.")}
-            className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition neon-glow"
-          >
-            {t("academy.enroll")}
-          </button>
+          {hasSuperprof() ? (
+            <a
+              href={SUPERPROF_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition neon-glow"
+            >
+              {t("academy.enroll")}
+            </a>
+          ) : (
+            // TODO: en cuanto se configure SUPERPROF_URL en src/lib/site.ts este
+            // botón enlazará directamente al perfil de Superprof.
+            <button
+              onClick={() => toast.info("Apúntate desde Superprof — enlace disponible muy pronto.")}
+              className="mt-8 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:bg-primary/90 transition neon-glow"
+            >
+              {t("academy.enroll")}
+            </button>
+          )}
         </div>
       </section>
 

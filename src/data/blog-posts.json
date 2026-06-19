@@ -1,0 +1,62 @@
+[
+    {
+        "id":  1,
+        "title":  "Montar un LLM propio en un VPS sin GPU: lo que he aprendido",
+        "slug":  "montar-llm-propio-vps-sin-gpu-lo-que-he-aprendido",
+        "excerpt":  "Experiencia real desplegando un modelo de lenguaje local en un VPS Ubuntu sin GPU, con API propia, interfaz web y búsqueda semántica.",
+        "content":  "# Montar un LLM propio en un VPS sin GPU: lo que he aprendido\n\nDurante los últimos días he montado un modelo de lenguaje (LLM) funcionando **100% en local**, desplegado en un VPS sin GPU, accesible desde el navegador y capaz de responder preguntas sobre cualquier URL. \n\nNo ha sido un simple “hola mundo”, sino un **sistema completo**:\n* **Servidor:** VPS con Ubuntu 24.04.\n* **Modelo:** LLM local (sin depender de OpenAI).\n* **Backend:** API propia.\n* **Frontend:** Interfaz web para el usuario.\n* **Inteligencia:** Búsqueda semántica (**RAG**) para evitar respuestas inventadas (alucinaciones).\n\n### ¿Lo más interesante?\n\u003e 💡 **No necesitas una GPU** para empezar a trabajar con IA de forma seria. Con una buena arquitectura y expectativas realistas, es perfectamente viable.\n\nEste tipo de soluciones abre la puerta a:\n1. **Más control** sobre tus datos y flujos de trabajo.\n2. **Más privacidad** al no enviar información a servidores externos.\n3. **Menos dependencia** de las API de terceros y sus cambios de tarifas.\n\n---\n\n📌 **La IA no es solo usar herramientas. También es saber construirlas.**\n\n¿Cómo lo ves? ¿Crees que las empresas acabarán apostando por modelos locales o híbridos?",
+        "category":  "ai",
+        "categoryOriginal":  "IA",
+        "tags":  [
+                     "ia"
+                 ],
+        "date":  "2026-06-08",
+        "metaDescription":  "Aprende cómo desplegar un LLM local en un VPS sin GPU utilizando Ubuntu, API propia y búsqueda semántica para obtener respuestas más fiables.",
+        "minRead":  4
+    },
+    {
+        "id":  2,
+        "title":  "Incidente real: la importancia de una buena documentación técnica",
+        "slug":  "incidente-real-importancia-buena-documentacion-tecnica",
+        "excerpt":  "Un problema con los controladores Wi-Fi de un portátil Asus demuestra cómo una documentación incorrecta puede generar incidencias y pérdidas de tiempo.",
+        "content":  "# ⚠️ INCIDENTE REAL: La importancia de una buena documentación técnica\n\nRecientemente adquirí un **Asus Vivobook Go 15 E1504FA** sin sistema operativo, con la intención de instalar manualmente Windows 11 y configurar todo desde cero. \n\nDurante el proceso, me encontré con un problema que, a simple vista, parecía menor: **el sistema no detectaba redes Wi-Fi** tras la instalación.\n\nLa UEFI mostraba que el hardware funcionaba correctamente, y los controladores oficiales descargados desde la web de ASUS fueron instalados sin errores aparentes. Sin embargo, el adaptador inalámbrico seguía sin aparecer.\n\nTras una investigación más profunda, descubrí que la causa no estaba en el sistema operativo ni en la configuración del equipo, sino en la **documentación errónea publicada por el propio fabricante**. ASUS ofrecía controladores *Realtek*, cuando el modelo en realidad utiliza *MediaTek* como chipset Wi-Fi. Al instalar los controladores correctos, el problema quedó resuelto.\n\n### Las lecciones del caso\nEste caso, aunque sencillo, refleja una realidad importante:\n* Incluso las grandes empresas pueden cometer errores en la gestión y publicación de controladores.\n* La falta de precisión en la documentación genera horas de trabajo adicional, frustración y desconfianza en el soporte técnico.\n\nEn entornos profesionales, una **documentación clara, actualizada y verificable** es tan crítica como el propio software. Contar con repositorios bien gestionados y procesos de validación internos evita incidencias que pueden escalar rápidamente y afectar la experiencia del usuario final.",
+        "category":  "dev",
+        "categoryOriginal":  "Tecnología",
+        "tags":  [
+                     "tecnología"
+                 ],
+        "date":  "2026-05-23",
+        "metaDescription":  "Caso real de un problema con controladores Wi-Fi en un Asus Vivobook que demuestra la importancia de una documentación técnica precisa y actualizada.",
+        "minRead":  5
+    },
+    {
+        "id":  3,
+        "title":  "Nginx, Chatwoot y n8n: cómo dos líneas de configuración solucionaron un error 401",
+        "slug":  "nginx-chatwoot-n8n-como-dos-lineas-solucionaron-error-401",
+        "excerpt":  "Debugging de un error 401 entre n8n y Chatwoot causado por el comportamiento por defecto de Nginx con los headers que contienen guiones bajos.",
+        "content":  "# Anoche perdí varias horas debuggeando un error absurdo entre n8n y Chatwoot\n\nTodo funcionaba:\n* ✅ Widget funcionando\n* ✅ Login correcto\n* ✅ API accesible\n* ✅ Docker OK\n* ❌ Pero cada request devolvía: `401 - You need to sign in or sign up before continuing`\n\n### Todo lo que probé antes de dar con la solución:\n* Tokens nuevos\n* Reinstalar Chatwoot\n* PostgreSQL\n* Headers *Authorization* y *Bearer Tokens*\n* Configuración de Cloudflare\n* Nodos de n8n, peticiones directas con `curl` y pruebas en Postman... **y nada.**\n\n---\n\n### El problema REAL era Nginx 🌐\nPor defecto, Nginx elimina los headers que contienen guiones bajos (`_`). \n\nY resulta que Chatwoot autentica su API utilizando exactamente este header:\n`api_access_token`\n\n**El resultado:** El header era interceptado y borrado por el proxy inverso, por lo que nunca llegaba al contenedor de la aplicación.\n\n### La solución 🛠️\nLa solución fueron literalmente dos líneas en la configuración de Nginx:\n\n```nginx\nunderscores_in_headers on;\nignore_invalid_headers off;\n```",
+        "category":  "dev",
+        "categoryOriginal":  "DevOps",
+        "tags":  [
+                     "devops"
+                 ],
+        "date":  "2026-05-10",
+        "metaDescription":  "Descubre cómo una configuración por defecto de Nginx bloqueó la autenticación entre Chatwoot y n8n, provocando errores 401 difíciles de diagnosticar.",
+        "minRead":  4
+    },
+    {
+        "id":  4,
+        "title":  "Vulnerabilidad crítica en WordPress: lecciones de un caso real con Ninja Forms",
+        "slug":  "vulnerabilidad-critica-wordpress-lecciones-caso-real-ninja-forms",
+        "excerpt":  "Cómo una vulnerabilidad crítica en el plugin Ninja Forms fue detectada y mitigada gracias a un aviso de seguridad de INCIBE.",
+        "content":  "# 🔐 Vulnerabilidad crítica en WordPress: un caso real que conviene no ignorar\n\nA raíz de una alerta publicada por **INCIBE** (INCIBE-2026-266), he podido identificar y mitigar una vulnerabilidad crítica en un sitio web desarrollado con WordPress.\n\nEl problema afectaba al plugin **Ninja Forms** (versiones ≤ 3.3.26), permitiendo la subida arbitraria de archivos sin validación (**CVE-2026-0740**). Esto abría la puerta a que un atacante no autenticado pudiera ejecutar código de forma remota (RCE).\n\n### El verdadero riesgo\nLo relevante en este caso no es solo la vulnerabilidad en sí, sino el contexto operativo:\n* ⚠️ La actualización automática no estaba disponible para este entorno.\n* 🔍 Si nadie revisa este tipo de avisos de forma proactiva, el sistema permanece expuesto indefinidamente.\n\n---\n\n### ¿Qué pasos se siguieron para la mitigación?\n1. **Detección:** Identificación del riesgo gracias al aviso oficial de INCIBE.\n2. **Verificación:** Auditoría interna y comprobación del alcance real en el sitio web.\n3. **Actualización:** Aplicación manual del parche a la versión 3.3.27.\n4. **Resolución:** Problema mitigado con éxito.\n\n---\n\n### Conclusión clara 💡\nLa seguridad rara vez falla por vectores ultra complejos; suele fallar por lo que simplemente se deja sin revisar. Monitorizar fuentes oficiales, auditar dependencias y **no depender únicamente de los automatismos** es lo que marca la diferencia entre un sistema seguro y uno vulnerable.\n\n¿Cuántas webs crees que siguen siendo vulnerables a esto ahora mismo sin saberlo?",
+        "category":  "cyber",
+        "categoryOriginal":  "Ciberseguridad",
+        "tags":  [
+                     "ciberseguridad"
+                 ],
+        "date":  "2026-05-06",
+        "metaDescription":  "Análisis de una vulnerabilidad crítica en WordPress que afectaba a Ninja Forms y cómo una actualización manual evitó la exposición del sitio web.",
+        "minRead":  4
+    }
+]

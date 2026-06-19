@@ -3,6 +3,7 @@ import { ArrowLeft, Clock } from "lucide-react";
 import { articleBySlug } from "@/data/articles";
 import { categoryById } from "@/data/categories";
 import { useI18n } from "@/lib/i18n";
+import { Markdown } from "@/components/Markdown";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
@@ -13,12 +14,13 @@ export const Route = createFileRoute("/blog/$slug")({
   head: ({ loaderData }) => {
     const a = loaderData?.article;
     if (!a) return { meta: [{ title: "Artículo — MongoHacker" }] };
+    const desc = a.metaDescription || a.excerpt.es;
     return {
       meta: [
         { title: `${a.title.es} — MongoHacker Blog` },
-        { name: "description", content: a.excerpt.es },
+        { name: "description", content: desc },
         { property: "og:title", content: a.title.es },
-        { property: "og:description", content: a.excerpt.es },
+        { property: "og:description", content: desc },
         { property: "og:type", content: "article" },
         { property: "og:url", content: `/blog/${a.slug}` },
       ],
@@ -75,10 +77,8 @@ function ArticlePage() {
 
       <p className="mt-8 text-lg text-muted-foreground border-l-2 border-primary/60 pl-4">{article.excerpt[lang]}</p>
 
-      <div className="mt-8 text-foreground/90 leading-relaxed space-y-5">
-        {article.body[lang].split("\n").map((p, i) => (
-          <p key={i}>{p}</p>
-        ))}
+      <div className="mt-8">
+        <Markdown>{article.body[lang]}</Markdown>
       </div>
 
       <div className="mt-10 flex flex-wrap gap-2">

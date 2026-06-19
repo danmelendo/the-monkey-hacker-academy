@@ -36,10 +36,8 @@ function Index() {
   const featuredArticles = articles.filter((a) => a.featured).slice(0, 2);
 
   const stats = [
-    { value: "12.000+", label: t("stats.students") },
-    { value: "180+", label: t("stats.articles") },
-    { value: "8.500+", label: t("stats.subscribers") },
-    { value: "24", label: t("stats.courses") },
+    { value: String(courses.length), label: t("stats.courses") },
+    { value: "14", label: t("stats.students") },
   ];
 
   return (
@@ -93,7 +91,7 @@ function Index() {
                   ))}
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  +12.000 alumnos ya están dentro
+                  14 alumnos ya están dentro
                 </p>
               </div>
             </div>
@@ -142,7 +140,7 @@ function Index() {
       {/* Stats */}
       <section className="border-b border-border/60 bg-card/30">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 gap-6 max-w-md">
             {stats.map((s) => (
               <div key={s.label} className="text-center md:text-left">
                 <div className="font-display text-3xl md:text-4xl font-bold neon-text">{s.value}</div>
@@ -225,7 +223,7 @@ function Index() {
                 "Lecciones cortas y visuales",
                 "Misiones prácticas, no teoría aburrida",
                 "Certificado al terminar cada curso",
-                "Comunidad activa en Discord",
+                "Comunidad activa en YouTube y redes",
               ].map((f) => (
                 <li key={f} className="flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-primary mt-0.5 shrink-0" />

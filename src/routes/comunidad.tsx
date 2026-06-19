@@ -1,7 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Trophy, Target, Users, ArrowRight } from "lucide-react";
+import { Youtube, Instagram, ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
+import { TikTokIcon } from "@/components/SocialIcons";
+import { YouTubeEmbed, InstagramEmbed, TikTokEmbed } from "@/components/SocialEmbeds";
 import { useI18n } from "@/lib/i18n";
+import { SOCIAL, FEATURED } from "@/lib/site";
 
 export const Route = createFileRoute("/comunidad")({
   head: () => ({
@@ -9,10 +12,10 @@ export const Route = createFileRoute("/comunidad")({
       { title: "Comunidad — MongoHacker" },
       {
         name: "description",
-        content: "Únete a la comunidad MongoHacker en Discord. Ranking, retos mensuales y conexión con otros aprendices.",
+        content: "Sigue a MongoHacker en YouTube, TikTok e Instagram. Vídeos y shorts de ciberseguridad, IA y productividad.",
       },
       { property: "og:title", content: "Comunidad MongoHacker" },
-      { property: "og:description", content: "Discord, ranking y retos para curiosos digitales." },
+      { property: "og:description", content: "Vídeos y shorts de ciberseguridad, IA y productividad." },
       { property: "og:url", content: "/comunidad" },
     ],
     links: [{ rel: "canonical", href: "/comunidad" }],
@@ -20,14 +23,34 @@ export const Route = createFileRoute("/comunidad")({
   component: CommunityPage,
 });
 
-const ranking = [
-  { name: "Lara M.", points: 1820, badge: "🥇" },
-  { name: "Diego R.", points: 1640, badge: "🥈" },
-  { name: "Marta L.", points: 1490, badge: "🥉" },
-  { name: "Iván P.", points: 1320, badge: "" },
-  { name: "Noa S.", points: 1185, badge: "" },
-  { name: "Pablo T.", points: 1020, badge: "" },
-];
+const HANDLE = "@mongohacker";
+
+const channels = [
+  {
+    name: "YouTube",
+    url: SOCIAL.youtube,
+    Icon: Youtube,
+    desc: "Tutoriales y vídeos completos de ciberseguridad, IA y trucos digitales.",
+    accent: "text-red-500",
+    ring: "hover:border-red-500/50",
+  },
+  {
+    name: "TikTok",
+    url: SOCIAL.tiktok,
+    Icon: TikTokIcon,
+    desc: "Shorts rápidos, trucos y curiosidades tech en formato vertical.",
+    accent: "text-foreground",
+    ring: "hover:border-primary/50",
+  },
+  {
+    name: "Instagram",
+    url: SOCIAL.instagram,
+    Icon: Instagram,
+    desc: "Reels, novedades y el día a día detrás de MongoHacker.",
+    accent: "text-pink-500",
+    ring: "hover:border-pink-500/50",
+  },
+] as const;
 
 function CommunityPage() {
   const { t } = useI18n();
@@ -36,71 +59,49 @@ function CommunityPage() {
     <>
       <PageHero eyebrow="comunidad" title={t("community.title")} subtitle={t("community.subtitle")} showMono />
 
+      {/* Contenido destacado de cada red */}
       <section className="mx-auto max-w-5xl px-4 sm:px-6 py-12">
-        <div className="terminal-card p-8 md:p-10 text-center relative overflow-hidden">
-          <div
-            className="absolute -top-20 -right-20 h-64 w-64 rounded-full opacity-30 blur-3xl"
-            style={{ background: "radial-gradient(closest-side, oklch(0.82 0.24 145 / 0.6), transparent)" }}
-            aria-hidden
-          />
-          <div className="relative">
-            <Users className="h-12 w-12 text-primary mx-auto" />
-            <h2 className="mt-4 font-display text-3xl font-bold">+3.200 monos en Discord</h2>
-            <p className="mt-2 text-muted-foreground">Charla, dudas, retos, recursos y mucho meme.</p>
-            <a
-              href="#"
-              className="mt-6 inline-flex items-center gap-2 rounded-md bg-[#5865F2] px-6 py-3 text-sm font-semibold text-white hover:bg-[#4752c4] transition"
-            >
-              {t("community.join")} <ArrowRight className="h-4 w-4" />
-            </a>
-          </div>
+        <div className="flex items-center gap-2 mb-6">
+          <p className="text-xs font-mono uppercase tracking-[0.2em] text-primary">~/lo-último</p>
+        </div>
+
+        <YouTubeEmbed url={FEATURED.youtubeUrl} handle={HANDLE} profileUrl={SOCIAL.youtube} />
+
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          <InstagramEmbed postUrl={FEATURED.instagramPostUrl} handle={HANDLE} profileUrl={SOCIAL.instagram} />
+          <TikTokEmbed videoUrl={FEATURED.tiktokVideoUrl} handle={HANDLE} profileUrl={SOCIAL.tiktok} />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 py-12 grid lg:grid-cols-2 gap-8">
-        <div className="terminal-card p-6">
-          <div className="flex items-center gap-2 mb-5">
-            <Trophy className="h-5 w-5 text-amber-400" />
-            <h3 className="font-display text-xl font-bold">{t("community.ranking")}</h3>
-          </div>
-          <ul className="divide-y divide-border/60">
-            {ranking.map((u, i) => (
-              <li key={u.name} className="flex items-center justify-between py-3">
+      {/* Seguir en cada plataforma */}
+      <section className="mx-auto max-w-5xl px-4 sm:px-6 pb-16">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {channels.map((c) => {
+            const Icon = c.Icon;
+            return (
+              <a
+                key={c.name}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`terminal-card group p-6 flex flex-col border transition ${c.ring}`}
+              >
                 <div className="flex items-center gap-3">
-                  <span className="font-mono text-sm text-muted-foreground w-6">{i + 1}</span>
-                  <span className="text-2xl">{u.badge}</span>
-                  <span className="font-medium">{u.name}</span>
+                  <div className={`h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center ${c.accent}`}>
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-lg font-bold">{c.name}</h3>
+                    <p className="text-xs font-mono text-muted-foreground">{HANDLE}</p>
+                  </div>
                 </div>
-                <span className="font-mono text-sm neon-text">{u.points} XP</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="terminal-card p-6 scanlines relative overflow-hidden">
-          <div className="flex items-center gap-2 mb-5">
-            <Target className="h-5 w-5 text-primary" />
-            <h3 className="font-display text-xl font-bold">{t("community.challenges")}</h3>
-          </div>
-          <div className="space-y-3">
-            <div className="border border-primary/40 rounded-lg p-4 bg-primary/5">
-              <div className="text-xs font-mono uppercase tracking-wider text-primary">
-                {t("community.challenge.current")} · junio
-              </div>
-              <h4 className="mt-2 font-display text-lg font-bold">Caza el phishing</h4>
-              <p className="text-sm text-muted-foreground mt-1">
-                Analiza 5 correos sospechosos y comparte tus hallazgos en el canal #retos.
-              </p>
-            </div>
-            <div className="border border-border rounded-lg p-4 opacity-70">
-              <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground">mayo</div>
-              <h4 className="mt-1 font-display font-bold">Tu primer script en Python</h4>
-            </div>
-            <div className="border border-border rounded-lg p-4 opacity-70">
-              <div className="text-xs font-mono uppercase tracking-wider text-muted-foreground">abril</div>
-              <h4 className="mt-1 font-display font-bold">Prompt golf</h4>
-            </div>
-          </div>
+                <p className="mt-4 text-sm text-muted-foreground flex-1">{c.desc}</p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs font-mono text-primary">
+                  {t("community.follow")} <ArrowRight className="h-3 w-3 group-hover:translate-x-0.5 transition" />
+                </span>
+              </a>
+            );
+          })}
         </div>
       </section>
     </>

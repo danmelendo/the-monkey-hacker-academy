@@ -1,9 +1,7 @@
-import logoAsset from "@/assets/mongohacker-logo.png.asset.json";
-
 export function Logo({ size = 36, className = "" }: { size?: number; className?: string }) {
   return (
     <img
-      src={logoAsset.url}
+      src="/Logo.png"
       alt="MongoHacker"
       width={size}
       height={size}

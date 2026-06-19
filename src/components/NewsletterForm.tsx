@@ -2,6 +2,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { useI18n } from "@/lib/i18n";
+import { SUBSCRIBE_EMAIL } from "@/lib/site";
 
 const schema = z.object({ email: z.string().email() });
 
@@ -16,6 +17,12 @@ export function NewsletterForm({ variant = "default" }: { variant?: "default" | 
       toast.error(t("form.invalidEmail"));
       return;
     }
+    // Sin backend: abrimos la app de correo del usuario con un alta prerrellenada.
+    const subject = encodeURIComponent("Alta en MongoMail");
+    const body = encodeURIComponent(
+      `¡Hola! Quiero suscribirme a MongoMail.\n\nMi email: ${email}\n\n¡Gracias!`,
+    );
+    window.location.href = `mailto:${SUBSCRIBE_EMAIL}?subject=${subject}&body=${body}`;
     toast.success(t("mongomail.success"));
     setEmail("");
   };
