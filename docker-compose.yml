@@ -1,0 +1,13 @@
+services:
+  web:
+    build: .
+    image: monkeyacademy-web
+    container_name: monkeyacademy-web
+    restart: unless-stopped
+    # Mapea el puerto del host (izquierda) al del contenedor (derecha).
+    # Cambia 8080 por el puerto libre que quieras exponer en el VPS.
+    ports:
+      - "8080:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000

@@ -1,0 +1,17 @@
+node_modules
+.output
+.nitro
+.vinxi
+.tanstack
+.wrangler
+dist
+dist-ssr
+.git
+.gitignore
+*.log
+.env
+.env.*
+.dev.vars
+.vscode
+.idea
+Recursos
