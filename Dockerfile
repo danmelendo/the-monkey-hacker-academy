@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- Build stage ----
-FROM node:22-alpine AS builder
+FROM node:24-alpine AS builder
 WORKDIR /app
 
 # Compilar Nitro para un servidor Node (no Cloudflare)
@@ -16,15 +16,15 @@ COPY . .
 RUN npm run build
 
 # ---- Runtime stage ----
-FROM node:22-alpine AS runner
+FROM node:24-alpine AS runner
 WORKDIR /app
 
 ENV NODE_ENV=production
 # El servidor de Nitro escucha en este puerto dentro del contenedor
-ENV PORT=3000
+ENV PORT=5666
 
 # Solo necesitamos la salida del build para ejecutar
 COPY --from=builder /app/.output ./.output
 
-EXPOSE 3000
+EXPOSE 5666
 CMD ["node", ".output/server/index.mjs"]
