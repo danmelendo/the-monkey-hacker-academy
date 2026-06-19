@@ -12,4 +12,8 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  // Fuera del sandbox de Lovable, el plugin de Nitro se desactiva por defecto.
+  // Lo forzamos con el preset node-server para generar un servidor Node
+  // autónomo en `.output/server/index.mjs` (lo que ejecuta el contenedor Docker).
+  nitro: { preset: "node-server" },
 });
